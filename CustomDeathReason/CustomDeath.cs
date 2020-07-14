@@ -46,7 +46,10 @@ namespace CustomDeath
             {
                 using (MemoryStream data = new MemoryStream(args.Msg.readBuffer, args.Index, args.Length))
                 {
-                    //Reads packet data. See https://tshock.readme.io/docs/multiplayer-packet-structure for packet information
+                    // You can see how packets are handled in MessageBuffer.cs and how they are sent in NetMessage.cs
+                    // TShock's GetDataHandler.cs can be used as an example on deserializing packets, same with other plugins
+                    // Some custom types from terraria have their own methods to read from a binary reader (you can see this in use by tshock & terraria's messagebuffer)
+                    // See https://tshock.readme.io/docs/multiplayer-packet-structure for more packet information
                     int player = data.ReadByte(); //Player ID
                     PlayerDeathReason deathReason = PlayerDeathReason.FromReader(new BinaryReader(data)); //Terraria.DataStructures.PlayerDeathReason
                     int damage = data.ReadInt16(); //Damage taken
